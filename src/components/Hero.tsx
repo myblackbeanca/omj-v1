@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -26,9 +27,12 @@ const Hero = () => {
               Learn More
               <ArrowRight className="ml-2" size={20} />
             </button>
-            <button className="bg-transparent border-2 border-[#FDE48C] text-[#FDE48C] px-8 py-3 rounded-full font-semibold hover:bg-[#FDE48C] hover:text-[#4A555D] transition-colors">
-              Donate Now
-            </button>
+            <Link to="/support">
+              <button className="bg-transparent border-2 border-[#FDE48C] text-[#FDE48C] px-8 py-3 rounded-full font-semibold hover:bg-[#FDE48C] hover:text-[#4A555D] transition-colors">
+                Donate Now
+              </button>
+            </Link>
+            
           </div>
         </div>
       </div>

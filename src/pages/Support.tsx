@@ -17,19 +17,63 @@ const Support = () => {
     setAmount(Number(e.target.value));
   };
 
-  const handleDonate = (anonymous: boolean) => {
+  const handleDonate = async (anonymous: boolean) => {
     if (anonymous) {
-      // Handle anonymous donation
-      navigate('/thank-you');
+      try {
+        const response = await fetch('https://omj-donation.alet8891.workers.dev', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            origin: window.location.origin,
+            amount: amount,
+            isAnonymous: true
+          }),
+        });
+  
+        const data = await response.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error('No checkout URL received');
+        }
+      } catch (error) {
+        console.error('Error processing donation:', error);
+        // Handle error (show error message to user)
+      }
     } else {
       setShowForm(true);
     }
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle donation with user details
-    navigate('/thank-you');
+    
+    try {
+      const response = await fetch('https://omj-donation.alet8891.workers.dev', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          origin: window.location.origin,
+          amount: amount,
+          isAnonymous: false,
+          donorInfo: formData
+        }),
+      });
+  
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
+    } catch (error) {
+      console.error('Error processing donation:', error);
+      // Handle error (show error message to user)
+    }
   };
 
   return (
