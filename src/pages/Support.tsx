@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Support = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState(100);
+  const [customAmount, setCustomAmount] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +16,17 @@ const Support = () => {
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(e.target.value));
+    setCustomAmount('');
+  };
+
+  const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*\.?\d*$/.test(value)) {
+      setCustomAmount(value);
+      if (value) {
+        setAmount(Number(value));
+      }
+    }
   };
 
   const handleDonate = async (anonymous: boolean) => {
@@ -40,7 +52,6 @@ const Support = () => {
         }
       } catch (error) {
         console.error('Error processing donation:', error);
-        // Handle error (show error message to user)
       }
     } else {
       setShowForm(true);
@@ -72,7 +83,6 @@ const Support = () => {
       }
     } catch (error) {
       console.error('Error processing donation:', error);
-      // Handle error (show error message to user)
     }
   };
 
@@ -106,11 +116,22 @@ const Support = () => {
               step="25"
               value={amount}
               onChange={handleSliderChange}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mb-4"
             />
             <div className="flex justify-between mt-2 text-sm text-gray-500">
               <span>$25</span>
               <span>$2000</span>
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-charcoal mb-2">Custom Amount</label>
+              <input
+                type="text"
+                value={customAmount}
+                onChange={handleCustomAmountChange}
+                placeholder="Enter custom amount"
+                className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-bubblegum"
+              />
             </div>
           </div>
 
@@ -118,7 +139,10 @@ const Support = () => {
             {[25, 50, 100, 250, 500].map((value) => (
               <button
                 key={value}
-                onClick={() => setAmount(value)}
+                onClick={() => {
+                  setAmount(value);
+                  setCustomAmount('');
+                }}
                 className={`flex-1 py-2 rounded-lg border ${
                   amount === value
                     ? 'border-bubblegum bg-bubblegum text-white'
