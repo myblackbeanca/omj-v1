@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import { Play, Mic, Mail, Headphones, Calendar } from 'lucide-react';
 import PageHero from '../components/PageHero';
+import { supabase } from '../supabase/client';
 
 const Podcast = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<{
+    show: boolean;
+    type: 'success' | 'error';
+    message: string;
+  }>({
+    show: false,
+    type: 'success',
+    message: '',
+  });
 
   const episodes = [
     {
@@ -48,9 +59,41 @@ const Podcast = () => {
     }
   ];
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    setEmail('');
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('podcast_subscribers')
+        .insert([
+          {
+            email,
+            subscribed_at: new Date().toISOString()
+          }
+        ]);
+
+      if (error) throw error;
+
+      setNotification({
+        show: true,
+        type: 'success',
+        message: 'Thanks for subscribing! You\'ll never miss an episode.'
+      });
+      setEmail('');
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      setNotification({
+        show: true,
+        type: 'error',
+        message: 'There was a problem subscribing. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => {
+        setNotification(prev => ({ ...prev, show: false }));
+      }, 5000);
+    }
   };
 
   return (
@@ -67,7 +110,7 @@ const Podcast = () => {
           <div className="bg-white rounded-xl shadow-lg p-8 md:flex gap-8">
             <div className="md:w-1/3 mb-6 md:mb-0">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400"
+                src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jfeldman.png"
                 alt="Jenny Feldman"
                 className="rounded-lg shadow-md w-full"
               />
@@ -166,6 +209,15 @@ const Podcast = () => {
             <p className="text-charcoal mb-8">
               Subscribe to our newsletter to get notified about new episodes, TMJ resources, and community updates.
             </p>
+            {notification.show && (
+              <div
+                className={`mb-6 p-4 rounded-lg ${
+                  notification.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                }`}
+              >
+                {notification.message}
+              </div>
+            )}
             <form onSubmit={handleSubscribe} className="flex gap-4">
               <input
                 type="email"
@@ -177,9 +229,20 @@ const Podcast = () => {
               />
               <button
                 type="submit"
-                className="bg-bubblegum text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors"
+                disabled={isSubmitting}
+                className="bg-bubblegum text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
-                Subscribe
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Subscribing...
+                  </>
+                ) : (
+                  'Subscribe'
+                )}
               </button>
             </form>
           </div>
