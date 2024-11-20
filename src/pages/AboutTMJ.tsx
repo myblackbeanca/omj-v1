@@ -63,6 +63,15 @@ const AboutTMJ = () => {
           </div>
           
           <div className="prose prose-lg">
+            <div className="mb-8">
+              <img
+                src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jennmin.png"
+                alt="TMJ Impact - Photo by Jenn Hoffman"
+                className="w-full rounded-xl shadow-lg"
+              />
+              <p className="text-sm text-gray-500 text-center mt-2">Photo credit: Jenn Hoffman - TMJ warrior, artist, and makeup magician</p>
+            </div>
+
             <p>TMDs don't come alone—they love to bring friends like:</p>
             <ul className="list-none space-y-2">
               {comorbidities.map((item, index) => (
@@ -81,6 +90,7 @@ const AboutTMJ = () => {
           </div>
         </section>
 
+        {/* Rest of the sections remain unchanged */}
         <section className="mb-20">
           <div className="flex items-center mb-8">
             <Umbrella className="w-8 h-8 text-bubblegum mr-4" />
