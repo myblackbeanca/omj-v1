@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <div className="relative min-h-[80vh] flex items-center">
+    <div className="relative h-[calc(100vh-4rem)] mt-16">
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
@@ -14,8 +14,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        <div className="text-center">
+      <div className="relative z-10 h-full flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             It's not all in your head
           </h1>
@@ -32,7 +32,6 @@ const Hero = () => {
                 Donate Now
               </button>
             </Link>
-            
           </div>
         </div>
       </div>
