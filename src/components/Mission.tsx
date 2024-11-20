@@ -12,9 +12,9 @@ const Mission = () => {
           <div className="max-w-3xl mx-auto space-y-6 text-lg">
             <div className="aspect-video w-full mb-8">
               <iframe
-                src="https://player.vimeo.com/video/1031592691/9e95122120"
+                src="https://player.vimeo.com/video/1031615792?badge=0&autopause=0&player_id=0&app_id=58479"
                 className="w-full h-full rounded-xl shadow-lg"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                 allowFullScreen
               ></iframe>
             </div>
