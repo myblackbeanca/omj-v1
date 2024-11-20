@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageHero from '../components/PageHero';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Volume2, Heart, Stethoscope } from 'lucide-react';
+import { ArrowRight, Volume2, Heart, Stethoscope } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../supabase/client';
 
 const MissionAndGoals = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const objectives = [
     {
       title: "Raising Awareness",
@@ -52,6 +56,29 @@ const MissionAndGoals = () => {
     }
   ];
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('mission_subscribers')
+        .insert([
+          {
+            email,
+            subscribed_at: new Date().toISOString()
+          }
+        ]);
+
+      if (error) throw error;
+      navigate('/support');
+    } catch (error) {
+      console.error('Error subscribing:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <PageHero
@@ -61,6 +88,53 @@ const MissionAndGoals = () => {
       />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Featured Images Section */}
+        <section className="mb-20">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="relative group">
+              <img
+                src="https://github.com/myblackbeanca/tmjimages/blob/main/omj5.png?raw=true"
+                alt="TMJ Support"
+                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg"
+              />
+              <Link
+                to="/about-tmj"
+                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 inline-flex items-center px-4 py-2 bg-bubblegum text-white rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors opacity-0 group-hover:opacity-100"
+              >
+                Learn More <ArrowRight className="ml-1" size={16} />
+              </Link>
+            </div>
+
+            <div className="relative group">
+              <img
+                src="https://github.com/myblackbeanca/tmjimages/blob/main/omj4.png?raw=true"
+                alt="TMJ Community"
+                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg"
+              />
+              <Link
+                to="/support"
+                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 inline-flex items-center px-4 py-2 bg-sunshine text-charcoal rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors opacity-0 group-hover:opacity-100"
+              >
+                Join Us <ArrowRight className="ml-1" size={16} />
+              </Link>
+            </div>
+
+            <div className="relative group">
+              <img
+                src="https://github.com/myblackbeanca/tmjimages/blob/main/omj8.png?raw=true"
+                alt="TMJ Resources"
+                className="w-full h-48 md:h-64 object-cover rounded-xl shadow-lg"
+              />
+              <Link
+                to="/resources"
+                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 inline-flex items-center px-4 py-2 bg-bubblegum text-white rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors opacity-0 group-hover:opacity-100"
+              >
+                Resources <ArrowRight className="ml-1" size={16} />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-20">
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-center mb-12">
@@ -78,7 +152,7 @@ const MissionAndGoals = () => {
           </div>
         </section>
 
-        <section className="mt-20">
+        <section className="mb-20">
           <div className="grid md:grid-cols-3 gap-8">
             {actionCards.map((card, index) => (
               <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all text-center">
@@ -95,6 +169,42 @@ const MissionAndGoals = () => {
                 </Link>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="bg-gray-50 rounded-xl p-8 max-w-2xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-2xl font-sigmar text-bubblegum mb-4">Join Our Mission</h2>
+            <p className="text-charcoal mb-6">
+              Subscribe to our newsletter and be part of the change. We'll redirect you to our support page where you can make an even bigger impact.
+            </p>
+            <form onSubmit={handleSubmit} className="flex gap-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-bubblegum"
+                required
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="bg-bubblegum text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Subscribing...
+                  </>
+                ) : (
+                  'Subscribe & Support'
+                )}
+              </button>
+            </form>
           </div>
         </section>
       </div>
