@@ -10,6 +10,14 @@ const Mission = () => {
             What is Oh my jaw?
           </h2>
           <div className="max-w-3xl mx-auto space-y-6 text-lg">
+            <div className="aspect-video w-full mb-8">
+              <iframe
+                src="https://player.vimeo.com/video/1031592691/9e95122120"
+                className="w-full h-full rounded-xl shadow-lg"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
             <p className="text-charcoal">
               OH MY JAW is a nonprofit all about changing the perception of TMJ disorders and women's health issues affecting the jaw.
             </p>
