@@ -9,7 +9,7 @@ import Newsletter from '../components/Newsletter';
 
 const Home = () => {
   return (
-    <div className="pt-20">
+    <div>
       <Hero />
       <Mission />
       <MissionVisionGoals />
