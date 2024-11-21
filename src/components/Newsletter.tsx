@@ -63,8 +63,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 bg-[#1D2B35] relative">
-      {/* Notification Toast */}
+    <section className="py-20 bg-gradient-to-b from-[#1D2B35] to-black relative">
       {notification.show && (
         <div
           className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transition-all transform ${
