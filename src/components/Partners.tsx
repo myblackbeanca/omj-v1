@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Partners = () => {
   return (
@@ -16,9 +17,12 @@ const Partners = () => {
                 Join us, get involved, and help us shape the future of TMJ awareness and care. Together, we can make a difference—one conversation at a time.
               </p>
             </div>
-            <button className="bg-sunshine text-charcoal font-bold px-6 py-3 rounded-full flex items-center hover:bg-opacity-80 transition-colors">
+            <Link 
+              to="/sponsor-us"
+              className="bg-sunshine text-charcoal font-bold px-6 py-3 rounded-full flex items-center hover:bg-opacity-80 transition-colors w-fit"
+            >
               Become a Partner <ArrowRight className="ml-2" size={20} />
-            </button>
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img 
