@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const LivedExperience = () => {
   return (
@@ -13,9 +14,12 @@ const LivedExperience = () => {
                 Our BLOG is packed with patient stories sharing trial-and-error hacks, real-world shortcuts, and hard-earned wisdom. It's resilience in action, straight from the people who get it.
               </p>
             </div>
-            <button className="bg-sunshine text-charcoal font-bold px-6 py-3 rounded-full flex items-center hover:bg-opacity-80 transition-colors">
+            <Link 
+              to="/blog"
+              className="bg-sunshine text-charcoal font-bold px-6 py-3 rounded-full flex items-center hover:bg-opacity-80 transition-colors w-fit"
+            >
               Read Our Blog <ArrowRight className="ml-2" size={20} />
-            </button>
+            </Link>
           </div>
           <div className="relative">
             <img 
