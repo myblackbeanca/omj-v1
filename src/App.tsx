@@ -17,6 +17,11 @@ import Podcast from './pages/Podcast';
 import Support from './pages/Support';
 import ThankYou from './pages/ThankYou';
 import Blog from './pages/Blog';
+import Guides from './pages/Resources/Guides';
+import EatingOut from './pages/Resources/Guides/EatingOut';
+import Flying from './pages/Resources/Guides/Flying';
+import Dating from './pages/Resources/Guides/Dating';
+import Parenting from './pages/Resources/Guides/Parenting';
 
 const App = () => {
   return (
@@ -32,6 +37,11 @@ const App = () => {
             <Route path="/about-tmj" element={<AboutTMJ />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/resources/guides" element={<Guides />} />
+            <Route path="/resources/guides/eating-out" element={<EatingOut />} />
+            <Route path="/resources/guides/flying" element={<Flying />} />
+            <Route path="/resources/guides/dating" element={<Dating />} />
+            <Route path="/resources/guides/parenting" element={<Parenting />} />
             <Route path="/why-omj" element={<WhyOMJ />} />
             <Route path="/sponsor-us" element={<SponsorUs />} />
             <Route path="/contact" element={<Contact />} />
