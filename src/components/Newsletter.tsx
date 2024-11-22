@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../supabase/client';
 
 const Newsletter = () => {
@@ -79,10 +79,10 @@ const Newsletter = () => {
         <div className="text-center">
           <Mail className="w-12 h-12 text-bubblegum mx-auto mb-4" />
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            does TMJ affect your life?
+            join the tribe...
           </h2>
           <h3 className="text-2xl text-bubblegum font-bold mb-6">
-            join the club...
+            does TMJ affect your life?
           </h3>
           <p className="text-xl text-gray-200 mb-8">
             Sign up to hear from us about news, events and updates.
