@@ -1,127 +1,94 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabase/client';
-import { X } from 'lucide-react';
+import { Video, Image as ImageIcon, Download } from 'lucide-react';
+import PageHero from '../components/PageHero';
+import SubscriptionForm from '../components/SubscriptionForm';
+import GuidesList from '../components/GuidesList';
 
-interface SubscriptionFormProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (data: { email: string; phone: string }) => void;
-  guidePath: string;
-}
+const Resources = () => {
+  const [showSubscriptionForm, setShowSubscriptionForm] = useState(false);
+  const [selectedInfographic, setSelectedInfographic] = useState<string | null>(null);
 
-const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ 
-  isOpen, 
-  onClose, 
-  onSubmit,
-  guidePath 
-}) => {
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Basic validation
-    if (!email || !phone) {
-      setError('Please fill in all required fields');
-      return;
+  const infographics = [
+    {
+      title: "Valuable Lessons for TMJ Surgery",
+      description: "Essential insights and tips for those considering or recovering from TMJ surgery.",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600",
+      url: "https://drive.google.com/file/d/1bUfrzezkI1G_E5XEtZLFbuX73wuElDtR/view?usp=drive_link"
+    },
+    {
+      title: "Avoiding the Dentist because of TMJ/TMD pain",
+      description: "Understanding and managing dental anxiety related to TMJ/TMD pain.",
+      image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=600",
+      url: "https://drive.google.com/file/d/1jEb15OXtyZbk5XJeqFxaXCuNKWmXAbR3/view?usp=drive_link"
     }
+  ];
 
-    setIsSubmitting(true);
-    setError('');
-
-    try {
-      // Insert subscription to Supabase
-      const { error: supabaseError } = await supabase
-        .from('subscriptions')
-        .insert([
-          { 
-            email, 
-            phone, 
-            infographic_url: guidePath 
-          }
-        ]);
-
-      if (supabaseError) throw supabaseError;
-
-      // Call parent component's submit handler
-      onSubmit({ email, phone });
-
-      // Reset form
-      setEmail('');
-      setPhone('');
-    } catch (err) {
-      console.error('Subscription error:', err);
-      setError('Failed to submit subscription. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleInfographicClick = (url: string) => {
+    setSelectedInfographic(url);
+    setShowSubscriptionForm(true);
   };
 
-  if (!isOpen) return null;
+  const handleSubscriptionSubmit = (data: { email: string; phone: string }) => {
+    console.log('Subscription data:', data);
+    if (selectedInfographic) {
+      window.open(selectedInfographic, '_blank');
+    }
+    setShowSubscriptionForm(false);
+  };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-xl p-8 w-full max-w-md relative">
-        <button 
-          onClick={onClose} 
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-        >
-          <X className="w-6 h-6" />
-        </button>
-        
-        <h2 className="text-2xl font-sigmar text-bubblegum mb-4">
-          Access Infographic
-        </h2>
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && (
-            <div className="bg-red-100 text-red-700 p-3 rounded">
-              {error}
-            </div>
-          )}
-          
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-charcoal">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-bubblegum focus:ring focus:ring-bubblegum/50"
-            />
+    <div className="min-h-screen">
+      <PageHero
+        title="Media & Infographics"
+        subtitle="Educational resources about TMJ"
+        backgroundImage="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1920"
+      />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <GuidesList />
+
+        {/* Educational Infographics Section */}
+        <section className="mt-20">
+          <div className="text-center mb-12">
+            <ImageIcon className="w-12 h-12 text-bubblegum mx-auto mb-4" />
+            <h2 className="text-3xl font-sigmar text-bubblegum mb-4">Educational Infographics</h2>
+            <p className="text-lg text-charcoal">
+              Download and share these informative visual guides
+            </p>
           </div>
-          
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-charcoal">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-bubblegum focus:ring focus:ring-bubblegum/50"
-            />
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {infographics.map((infographic, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
+                <img
+                  src={infographic.image}
+                  alt={infographic.title}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-charcoal mb-3">{infographic.title}</h3>
+                  <p className="text-gray-600 mb-4">{infographic.description}</p>
+                  <button 
+                    onClick={() => handleInfographicClick(infographic.url)}
+                    className="flex items-center text-bubblegum font-semibold hover:text-opacity-80 transition-colors"
+                  >
+                    <Download className="w-5 h-5 mr-2" /> Access Infographic
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-          
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-bubblegum text-white py-3 rounded-md hover:bg-opacity-90 transition-colors disabled:opacity-50"
-          >
-            {isSubmitting ? 'Submitting...' : 'Get Infographic'}
-          </button>
-        </form>
+        </section>
+
+        <SubscriptionForm
+          isOpen={showSubscriptionForm}
+          onClose={() => setShowSubscriptionForm(false)}
+          onSubmit={handleSubscriptionSubmit}
+          guidePath={selectedInfographic || ''}
+        />
       </div>
     </div>
   );
 };
 
-export default SubscriptionForm;
+export default Resources;
