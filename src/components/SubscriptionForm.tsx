@@ -19,7 +19,6 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ isOpen, onClose, on
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({ email, phone });
-    navigate(guidePath);
   };
 
   return (
