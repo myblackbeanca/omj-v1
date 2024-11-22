@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Send } from 'lucide-react';
+import { Send, Facebook, Instagram, Linkedin } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import { supabase } from '../supabase/client';
 
@@ -20,6 +20,24 @@ const Contact = () => {
     email: '',
     message: ''
   });
+
+  const socialLinks = [
+    {
+      platform: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=61561062720062',
+      icon: Facebook
+    },
+    {
+      platform: 'Instagram',
+      url: 'https://www.instagram.com/ohhhmyjaw/',
+      icon: Instagram
+    },
+    {
+      platform: 'LinkedIn',
+      url: 'https://www.linkedin.com/company/oh-my-jaw/',
+      icon: Linkedin
+    }
+  ];
 
   const showNotification = (type: 'success' | 'error', message: string) => {
     setNotification({ show: true, type, message });
@@ -62,7 +80,6 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Notification Toast */}
       {notification.show && (
         <div
           className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transition-all transform ${
@@ -166,6 +183,26 @@ const Contact = () => {
               )}
             </button>
           </form>
+        </div>
+
+        <div className="mt-12 text-center">
+          <h3 className="text-xl font-semibold text-charcoal mb-4">Connect With Us</h3>
+          <div className="flex justify-center space-x-6">
+            {socialLinks.map((link, index) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-bubblegum hover:text-opacity-80 transition-colors"
+                >
+                  <Icon className="w-6 h-6" />
+                </a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
