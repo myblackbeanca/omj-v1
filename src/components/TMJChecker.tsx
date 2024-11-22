@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import SubscriptionForm from './SubscriptionForm';
 
 const TMJChecker = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
+  const [showSubscriptionForm, setShowSubscriptionForm] = useState(false);
   const navigate = useNavigate();
 
   const symptoms = [
@@ -56,8 +58,14 @@ const TMJChecker = () => {
 
   const handleSubmit = () => {
     if (selectedSymptoms.length > 0) {
-      navigate('/resources');
+      setShowSubscriptionForm(true);
     }
+  };
+
+  const handleSubscriptionSubmit = (data: { email: string; phone: string }) => {
+    console.log('Subscription data:', data);
+    setShowSubscriptionForm(false);
+    navigate('/about-tmj');
   };
 
   return (
@@ -65,16 +73,16 @@ const TMJChecker = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <button 
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full flex items-center justify-between bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all"
+          className="w-full flex items-center justify-between bg-bubblegum text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
         >
           <div className="flex items-center">
-            <AlertCircle className="w-6 h-6 text-bubblegum mr-4" />
-            <h2 className="text-2xl font-sigmar text-bubblegum">TMJ-curious? Check Your Symptoms</h2>
+            <AlertCircle className="w-6 h-6 mr-4" />
+            <h2 className="text-2xl font-sigmar">TMJ-curious? Check Your Symptoms</h2>
           </div>
           {isExpanded ? (
-            <ChevronUp className="w-6 h-6 text-bubblegum" />
+            <ChevronUp className="w-6 h-6" />
           ) : (
-            <ChevronDown className="w-6 h-6 text-bubblegum" />
+            <ChevronDown className="w-6 h-6" />
           )}
         </button>
 
@@ -118,7 +126,7 @@ const TMJChecker = () => {
                 </p>
                 <button
                   onClick={handleSubmit}
-                  className="px-8 py-3 rounded-full font-semibold bg-bubblegum text-white hover:bg-opacity-90 transition-colors"
+                  className="px-8 py-3 rounded-full font-semibold bg-bubblegum text-white hover:bg-opacity-90 transition-colors transform hover:scale-105"
                 >
                   Learn More About TMJ
                 </button>
@@ -126,6 +134,13 @@ const TMJChecker = () => {
             )}
           </div>
         )}
+
+        <SubscriptionForm
+          isOpen={showSubscriptionForm}
+          onClose={() => setShowSubscriptionForm(false)}
+          onSubmit={handleSubscriptionSubmit}
+          guidePath="/about-tmj"
+        />
       </div>
     </section>
   );
