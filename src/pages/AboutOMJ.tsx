@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Megaphone, Users, BookOpen, HeartHandshake, Handshake, ArrowRight } from 'lucide-react';
+import { ArrowRight, Volume2, Heart, Stethoscope, HandHeart, Handshake } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import Initiatives from '../components/Initiatives';
 import Partners from '../components/Partners';
@@ -9,7 +9,7 @@ import LivedExperience from '../components/LivedExperience';
 const AboutOMJ = () => {
   const initiatives = [
     {
-      icon: <Megaphone className="w-12 h-12 text-bubblegum" />,
+      icon: <Volume2 className="w-12 h-12 text-bubblegum" />,
       title: "Public Awareness Campaigns",
       description: "We're making TMJ Awareness Month (November) and beyond impossible to ignore with high-profile social media challenges, influencer collabs, and partnerships with consumer brands that help us reach way beyond the usual crowd.",
       items: [
@@ -19,43 +19,42 @@ const AboutOMJ = () => {
       ]
     },
     {
-      icon: <Users className="w-12 h-12 text-bubblegum" />,
-      title: "Patient Support & Resource Hub",
-      description: "We're building a one-stop online platform for TMJ patients and their families—offering the guidance, resources, and community connections you need to take control of your care.",
-      items: [
-        "Insights from Lived Experience Experts – Real stories, real advice, real solutions from people who've been through it.",
-        "Support Groups & Digital Medical Binders – Track your progress and connect with others who get it.",
-        "Advocacy Services – Help navigating insurance claims and accessing care.",
-        "Local Support Groups – Meet-ups IRL or online to connect with your TMJ crew."
-      ]
+      icon: <Heart className="w-12 h-12 text-bubblegum" />,
+      title: "End the Stigma",
+      description: "Shining a light through real stories—our video testimonials reveal the impact of stigma and gender bias on TMJ patients. Through storytelling and infotainment, we're dismantling stereotypes and showing the world the truth about living with TMJ.",
+      linkText: "Watch Stories",
+      linkTo: "/resources"
     },
     {
-      icon: <BookOpen className="w-12 h-12 text-bubblegum" />,
-      title: "Research Advocacy",
-      description: "We're working with researchers, healthcare pros, and policymakers to fight for more funding and better care. Our focus? Closing the gender gap in TMJ research and improving outcomes for every patient.",
-      items: [
-        "Workshops & Conferences for Providers – Educating the experts and promoting better TMJ care practices.",
-        "Educational Materials Development – Making sure providers and patients are equipped with the latest research and knowledge."
-      ]
+      icon: <Stethoscope className="w-12 h-12 text-bubblegum" />,
+      title: "Make Care Accessible",
+      description: "We get it—TMJ treatment is complicated. Our resource guide breaks it down in plain language to help patients and caregivers understand their options and navigate the journey to better health. Because everyone deserves access to care that works.",
+      linkText: "Access Resources",
+      linkTo: "/resources"
+    }
+  ];
+
+  const actionCards = [
+    {
+      icon: <Volume2 className="w-12 h-12 text-bubblegum" />,
+      title: "Let's Make Some Noise!",
+      description: "We're not just talking about TMJ—we're making sure everyone hears about it. Through campaigns, storytelling, and partnerships, we're spreading the word, breaking the silence, and changing the conversation around TMJ disorders.",
+      linkText: "Join Our Movement",
+      linkTo: "/support"
     },
     {
-      icon: <HeartHandshake className="w-12 h-12 text-bubblegum" />,
-      title: "Community Engagement",
-      description: "We're building a supportive network where TMJ patients, healthcare providers, and advocates come together to share best practices and grow stronger—because no one should have to do this alone.",
-      items: [
-        "Fundraisers & Health Festivals – Events that connect, uplift, and educate.",
-        'Annual Gala: "Giving TMJ a Makeover" – Where advocacy meets glam for a night of inspiration and impact.',
-        "Women's Music & Health Festival – Celebrate, learn, and vibe with others while raising awareness for TMJ."
-      ]
+      icon: <Heart className="w-12 h-12 text-bubblegum" />,
+      title: "End the Stigma",
+      description: "Shining a light through real stories—our video testimonials reveal the impact of stigma and gender bias on TMJ patients. Through storytelling and infotainment, we're dismantling stereotypes and showing the world the truth about living with TMJ.",
+      linkText: "Watch Stories",
+      linkTo: "/resources"
     },
     {
-      icon: <Handshake className="w-12 h-12 text-bubblegum" />,
-      title: "Strategic Partnerships",
-      description: "We're teaming up with companies, influencers, and healthcare professionals to increase TMJ visibility and support innovative solutions for patient care. Our partners help us make noise, fundraise, and find creative ways to improve the lives of TMJ sufferers.",
-      items: [
-        "#TMJBlows Fundraising Campaign – Blowing bubbles and breaking barriers for TMJ awareness.",
-        "Creative Collabs – From musicians to wellness brands, we're joining forces to give TMJ the attention it deserves."
-      ]
+      icon: <Stethoscope className="w-12 h-12 text-bubblegum" />,
+      title: "Make Care Accessible",
+      description: "We get it—TMJ treatment is complicated. Our resource guide breaks it down in plain language to help patients and caregivers understand their options and navigate the journey to better health. Because everyone deserves access to care that works.",
+      linkText: "Access Resources",
+      linkTo: "/resources"
     }
   ];
 
@@ -85,14 +84,16 @@ const AboutOMJ = () => {
                   {initiative.description}
                 </p>
                 
-                <ul className="space-y-4">
-                  {initiative.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start">
-                      <span className="w-2 h-2 bg-bubblegum rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-charcoal">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                {initiative.items && (
+                  <ul className="space-y-4">
+                    {initiative.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start">
+                        <span className="w-2 h-2 bg-bubblegum rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="text-charcoal">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </section>
           ))}
