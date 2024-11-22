@@ -23,10 +23,12 @@ const Hero = () => {
             Understanding, supporting, and advocating for those affected by TMJ disorders.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-[#FD75B4] text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-colors flex items-center justify-center">
-              Learn More
-              <ArrowRight className="ml-2" size={20} />
-            </button>
+            <Link to="/about-omj">
+              <button className="bg-[#FD75B4] text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-colors flex items-center justify-center">
+                Learn More
+                <ArrowRight className="ml-2" size={20} />
+              </button>
+            </Link>
             <Link to="/support">
               <button className="bg-transparent border-2 border-[#FDE48C] text-[#FDE48C] px-8 py-3 rounded-full font-semibold hover:bg-[#FDE48C] hover:text-[#4A555D] transition-colors">
                 Donate Now
