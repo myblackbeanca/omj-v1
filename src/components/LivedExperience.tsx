@@ -23,7 +23,7 @@ const LivedExperience = () => {
           </div>
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600"
+              src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jfeldman.png"
               alt="Community Support"
               className="rounded-lg shadow-lg"
             />
