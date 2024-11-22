@@ -84,7 +84,7 @@ const MissionAndGoals = () => {
       <PageHero
         title="Our Mission & Goals"
         subtitle="Together, We Can Change the Game"
-        backgroundImage="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1920"
+        backgroundImage="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/omjbanner3.png"
       />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
