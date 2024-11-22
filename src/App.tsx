@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -17,6 +17,7 @@ import Podcast from './pages/Podcast';
 import Support from './pages/Support';
 import ThankYou from './pages/ThankYou';
 import Blog from './pages/Blog';
+import NotFound from './pages/NotFound';
 import Guides from './pages/Resources/Guides';
 import EatingOut from './pages/Resources/Guides/EatingOut';
 import Flying from './pages/Resources/Guides/Flying';
@@ -50,6 +51,8 @@ const App = () => {
             <Route path="/support" element={<Support />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </main>
         <Footer />
