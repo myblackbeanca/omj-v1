@@ -26,22 +26,22 @@ const Partners = () => {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <img 
-              src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=400" 
+              src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/omj6.png" 
               alt="Medical Professionals"
               className="rounded-lg shadow-md"
             />
             <img 
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=400" 
+              src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/omj7.png" 
               alt="Healthcare Innovation"
               className="rounded-lg shadow-md"
             />
             <img 
-              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=400" 
+              src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/omj10.png" 
               alt="Patient Care"
               className="rounded-lg shadow-md"
             />
             <img 
-              src="https://images.unsplash.com/photo-1576091160101-2a8b7a875d6a?auto=format&fit=crop&q=80&w=400" 
+              src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/omj13.png" 
               alt="Research"
               className="rounded-lg shadow-md"
             />
