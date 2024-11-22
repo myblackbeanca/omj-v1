@@ -7,19 +7,71 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply antialiased text-charcoal font-nunito;
+    @apply antialiased text-charcoal font-nunito overflow-x-hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-sigmar;
   }
+
+  /* Improve tap targets on mobile */
+  button, a {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-padding-top: 100px;
+  }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-bubblegum hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bubblegum;
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-bubblegum hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bubblegum min-h-[44px];
   }
+
+  /* Mobile-friendly container padding */
+  .container {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Improved focus styles for accessibility */
+  .focus-visible {
+    @apply outline-none ring-2 ring-bubblegum ring-offset-2;
+  }
+}
+
+/* Mobile-first media queries */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  .grid {
+    @apply grid-cols-1;
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-colors duration-200;
 }
