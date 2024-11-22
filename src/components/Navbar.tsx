@@ -95,8 +95,8 @@ const Navbar = () => {
             </Link>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-bubblegum hover:text-opacity-80">
+          <div className="hidden md:flex items-center space-x-6">
+            <Link to="/" className="text-bubblegum pt-2 hover:text-opacity-80">
               <Home size={24} />
             </Link>
             {menuItems.map((item, index) => (
