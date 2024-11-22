@@ -22,17 +22,12 @@ const AboutUs = () => {
     }
   ];
 
-  const partners = [
-    "Jawspace", "Facemypain", "Stryker", "AAOMS", "Penn TMJ",
-    "Indiana", "ICR Foundation", "Suzie Bergman Ted Talk", "Noam Aizemberg", "Priya Mistry"
-  ];
-
   return (
     <div className="min-h-screen">
       <PageHero
         title="About Us"
         subtitle="Our story, our mission, our community"
-        backgroundImage="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1920"
+        backgroundImage="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/OMJabout.jpg"
       />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -49,7 +44,7 @@ const AboutUs = () => {
             </div>
             <div className="sticky top-24">
               <iframe
-                src="https://www.youtube.com/embed/NeNldHXBoNQ?start=8&autoplay=1&mute=1"
+                src="https://www.youtube.com/embed/tzKA8HmEKno?start=254"
                 title="Jenny's Story"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -90,15 +85,6 @@ const AboutUs = () => {
               allowFullScreen
               className="w-full aspect-video rounded-xl shadow-lg"
             ></iframe>
-            <div className="md:col-span-2">
-              <iframe
-                src="https://www.cbsnews.com/video/embed/tmj-chronic-pain-metal-jaws-futile-treatments/"
-                title="CBS News TMJ Coverage"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full aspect-video rounded-xl shadow-lg"
-              ></iframe>
-            </div>
           </div>
         </section>
 
@@ -144,17 +130,6 @@ const AboutUs = () => {
               <p>What you wear during recovery can change your whole vibe. Learn how to elevate your pajama game and slip into something more comfortable while still feeling cute. Because even if you drool a little (we've all been there), you can still look fly AF doing it.</p>
               <p>At Oh My Jaw, we're building a community that understands TMJ isn't just about pain—it's about finding joy, style, and connection in every part of life.</p>
             </div>
-          </div>
-        </section>
-
-        <section className="mb-16">
-          <h2 className="text-3xl font-sigmar text-bubblegum mb-8">Our Partners</h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {partners.map((partner, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                <span className="text-charcoal font-semibold">{partner}</span>
-              </div>
-            ))}
           </div>
         </section>
 
