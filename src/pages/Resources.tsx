@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Video, Image as ImageIcon, Download } from 'lucide-react';
+import { supabase } from '../supabase/client'; // Adjust path as needed
 import PageHero from '../components/PageHero';
 import SubscriptionForm from '../components/SubscriptionForm';
 import GuidesList from '../components/GuidesList';
@@ -28,12 +29,34 @@ const Resources = () => {
     setShowSubscriptionForm(true);
   };
 
-  const handleSubscriptionSubmit = (data: { email: string; phone: string }) => {
-    console.log('Subscription data:', data);
-    if (selectedInfographic) {
-      window.open(selectedInfographic, '_blank');
+  const handleSubscriptionSubmit = async (data: { email: string; phone: string }) => {
+    try {
+      // Insert subscription data into Supabase
+      const { data: insertedData, error } = await supabase
+        .from('guides_subscriptions')
+        .insert({
+          email: data.email,
+          phone: data.phone || null,
+          infographic_url: selectedInfographic
+        });
+
+      if (error) {
+        console.error('Error inserting guides_subscriptions:', error);
+        alert('Failed to submit subscription. Please try again.');
+        return;
+      }
+
+      // Open the infographic in a new tab
+      if (selectedInfographic) {
+        window.open(selectedInfographic, '_blank');
+      }
+
+      // Reset form and show success message
+      setShowSubscriptionForm(false);
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      alert('An unexpected error occurred. Please try again.');
     }
-    setShowSubscriptionForm(false);
   };
 
   return (
