@@ -90,7 +90,7 @@ const Navbar = () => {
               <img
                 src="https://github.com/myblackbeanca/tmjimages/blob/main/logone.png?raw=true"
                 alt="OMJ Logo"
-                className="h-12 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
           </div>

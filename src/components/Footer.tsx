@@ -14,11 +14,15 @@ const Footer = () => {
 
     try {
       const { error } = await supabase
-        .from('newsletter_subscribers')
+        .from('newsletter_subscriptions')
         .insert([
           {
-            email,
+            first_name: "anomalous",
+            last_name: "anomalous",
+            email: email,
+            opt_in: true,
             subscribed_at: new Date().toISOString()
+            
           }
         ]);
 
@@ -56,7 +60,7 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-black to-[#1D2B35] text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_2fr] gap-8">
           {/* Logo and Description */}
           <div>
             <Link to="/" className="block mb-4">

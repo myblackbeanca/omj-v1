@@ -37,6 +37,7 @@ const ScrollToTop = () => {
 const App = () => {
   return (
     <Router>
+      <ScrollToTop/>
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">

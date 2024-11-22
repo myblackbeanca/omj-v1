@@ -22,7 +22,7 @@ const Hero = () => {
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
             Understanding, supporting, and advocating for those affected by TMJ disorders.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 *:mx-auto sm:*:mx-0">
             <Link to="/about-omj">
               <button className="bg-[#FD75B4] text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-colors flex items-center justify-center">
                 Learn More
