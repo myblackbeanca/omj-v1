@@ -35,12 +35,12 @@ const Podcast = () => {
   const upcomingEpisodes = [
     {
       title: "TMJ and Mental Health: Breaking the Cycle",
-      date: "April 1, 2024",
+      date: "January 5, 2025",
       guest: "Dr. Lisa Thompson"
     },
     {
       title: "Alternative Therapies for TMJ Relief",
-      date: "April 15, 2024",
+      date: "January 25, 2025",
       guest: "Dr. James Wilson"
     }
   ];
