@@ -1,48 +1,34 @@
 import React, { useState } from 'react';
-import { Play, Mic, Mail, Headphones, Calendar } from 'lucide-react';
+import { Play, Mic, Mail, Headphones, Calendar, Music2, Youtube } from 'lucide-react';
 import PageHero from '../components/PageHero';
-import { supabase } from '../supabase/client';
 
 const Podcast = () => {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [notification, setNotification] = useState<{
-    show: boolean;
-    type: 'success' | 'error';
-    message: string;
-  }>({
-    show: false,
-    type: 'success',
-    message: '',
-  });
 
-  const episodes = [
+  const platforms = [
     {
-      title: "Breaking the Silence: TMJ Stories That Need to Be Heard",
-      date: "March 15, 2024",
-      duration: "45 min",
-      description: "Join Jenny as she talks with TMJ warriors about their journey and the importance of speaking up.",
-      image: "https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&q=80&w=600",
-      guest: "Dr. Sarah Johnson",
-      topics: ["Patient Stories", "Advocacy", "Healthcare Access"]
+      name: "Spotify",
+      icon: <Music2 className="w-8 h-8" />,
+      url: "https://open.spotify.com/show/7gf0xG3OblePcEjVUW5naC",
+      available: true
     },
     {
-      title: "The Medical-Dental Divide: Bridging the Gap in TMJ Care",
-      date: "March 1, 2024",
-      duration: "38 min",
-      description: "Exploring the challenges of getting comprehensive care when TMJ falls between medical and dental coverage.",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600",
-      guest: "Dr. Michael Chen",
-      topics: ["Healthcare Policy", "Insurance Coverage", "Treatment Options"]
+      name: "Amazon Music",
+      icon: <Music2 className="w-8 h-8" />,
+      url: "https://music.amazon.com/podcasts/b92c856f-7a19-45f7-8595-a3463256ac7c/oh-my-jaw",
+      available: true
     },
     {
-      title: "Gender Bias in Pain Management",
-      date: "February 15, 2024",
-      duration: "42 min",
-      description: "A deep dive into how gender bias affects diagnosis, treatment, and research in TMJ disorders.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600",
-      guest: "Dr. Emily Rodriguez",
-      topics: ["Gender Bias", "Pain Management", "Research Gaps"]
+      name: "Apple Podcasts",
+      icon: <Music2 className="w-8 h-8" />,
+      url: "#",
+      available: false
+    },
+    {
+      name: "YouTube",
+      icon: <Youtube className="w-8 h-8" />,
+      url: "#",
+      available: false
     }
   ];
 
@@ -59,41 +45,9 @@ const Podcast = () => {
     }
   ];
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase
-        .from('podcast_subscribers')
-        .insert([
-          {
-            email,
-            subscribed_at: new Date().toISOString()
-          }
-        ]);
-
-      if (error) throw error;
-
-      setNotification({
-        show: true,
-        type: 'success',
-        message: 'Thanks for subscribing! You\'ll never miss an episode.'
-      });
-      setEmail('');
-    } catch (error) {
-      console.error('Error subscribing:', error);
-      setNotification({
-        show: true,
-        type: 'error',
-        message: 'There was a problem subscribing. Please try again.'
-      });
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => {
-        setNotification(prev => ({ ...prev, show: false }));
-      }, 5000);
-    }
+    setEmail('');
   };
 
   return (
@@ -110,7 +64,7 @@ const Podcast = () => {
           <div className="bg-white rounded-xl shadow-lg p-8 md:flex gap-8">
             <div className="md:w-1/3 mb-6 md:mb-0">
               <img
-                src="https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jfeldman.png"
+                srchttps://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jfeldman.png"
                 alt="Jenny Feldman"
                 className="rounded-lg shadow-md w-full"
               />
@@ -146,36 +100,42 @@ const Podcast = () => {
         {/* Recent Episodes */}
         <section className="mb-20">
           <h2 className="text-3xl font-sigmar text-bubblegum mb-12">Recent Episodes</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {episodes.map((episode, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all">
-                <img
-                  src={episode.image}
-                  alt={episode.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm text-gray-500">{episode.date}</span>
-                    <span className="text-sm text-gray-500">{episode.duration}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-charcoal mb-3">{episode.title}</h3>
-                  <p className="text-gray-600 mb-4">{episode.description}</p>
-                  <div className="mb-4">
-                    <p className="text-sm font-semibold text-bubblegum">Guest: {episode.guest}</p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {episode.topics.map((topic, topicIndex) => (
-                        <span key={topicIndex} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
-                          {topic}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <button className="flex items-center text-bubblegum font-semibold hover:text-opacity-80 transition-colors">
-                    <Play className="w-5 h-5 mr-2" /> Listen Now
-                  </button>
+          <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <iframe 
+              src="https://player.rss.com/spilling-the-teamj-intro-to-oh-my-jaw-with-jenny-feldman-wendi-grossman?theme=dark" 
+              style={{ width: '100%', height: '320px' }} 
+              title="Oh My Jaw" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            />
+          </div>
+        </section>
+
+        {/* Listen on Your Favorite Platform */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-sigmar text-bubblegum mb-8">Listen On Your Favorite Platform</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {platforms.map((platform, index) => (
+              <a
+                key={index}
+                href={platform.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all text-center ${
+                  !platform.available && 'opacity-50 cursor-not-allowed'
+                }`}
+                onClick={e => !platform.available && e.preventDefault()}
+              >
+                <div className="flex justify-center mb-4">
+                  {platform.icon}
                 </div>
-              </div>
+                <h3 className="text-lg font-semibold text-charcoal">
+                  {platform.name}
+                </h3>
+                {!platform.available && (
+                  <span className="text-sm text-bubblegum">Coming Soon</span>
+                )}
+              </a>
             ))}
           </div>
         </section>
@@ -209,15 +169,6 @@ const Podcast = () => {
             <p className="text-charcoal mb-8">
               Subscribe to our newsletter to get notified about new episodes, TMJ resources, and community updates.
             </p>
-            {notification.show && (
-              <div
-                className={`mb-6 p-4 rounded-lg ${
-                  notification.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                }`}
-              >
-                {notification.message}
-              </div>
-            )}
             <form onSubmit={handleSubscribe} className="flex gap-4">
               <input
                 type="email"
@@ -229,20 +180,9 @@ const Podcast = () => {
               />
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="bg-bubblegum text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                className="bg-bubblegum text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-colors"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Subscribing...
-                  </>
-                ) : (
-                  'Subscribe'
-                )}
+                Subscribe
               </button>
             </form>
           </div>
