@@ -64,7 +64,7 @@ const Podcast = () => {
           <div className="bg-white rounded-xl shadow-lg p-8 md:flex gap-8">
             <div className="md:w-1/3 mb-6 md:mb-0">
               <img
-                srchttps://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jfeldman.png"
+                src https://raw.githubusercontent.com/myblackbeanca/tmjimages/refs/heads/main/jfeldman.png"
                 alt="Jenny Feldman"
                 className="rounded-lg shadow-md w-full"
               />
