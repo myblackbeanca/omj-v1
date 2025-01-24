@@ -39,7 +39,7 @@ const App = () => {
     <Router>
       <ScrollToTop/>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        {/* <Navbar /> */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -66,7 +66,7 @@ const App = () => {
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
