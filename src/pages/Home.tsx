@@ -3,7 +3,7 @@ import { Instagram, Linkedin, Heart } from 'lucide-react';
 
 const Home = () => {
   return (
-    <div className=" bg-[#1D2B35] flex flex-col items-center justify-center px-4 pt-0">
+    <div className="min-h-screen bg-[#1D2B35] flex flex-col items-center justify-center px-4 pt-0">
       <div className="text-center flex-grow flex flex-col items-center justify-center">
         <img
           src="https://github.com/myblackbeanca/tmjimages/blob/main/logone.png?raw=true"
